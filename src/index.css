@@ -1,5 +1,8 @@
 :root {
   --primaryTextColor: #212121;
+  --secondaryTextColor: #566573;
+  --accentColor: #00bfff;
+  --bgColor: #fff9e7;
   --boxShadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
     0px 1px 1px rgba(0, 0, 0, 0.12);
   --timingFn: cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,6 +27,7 @@ body {
   color: var(--primaryTextColor);
   padding-top: 30px;
   padding-bottom: 30px;
+  background-image: url('./img/bg.jpg');
 }
 
 img {
