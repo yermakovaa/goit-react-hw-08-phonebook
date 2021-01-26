@@ -14,8 +14,6 @@ function ContactList() {
   const isLoading = useSelector(contactsSelectors.getLoading);
   const error = useSelector(contactsSelectors.getError);
 
-  useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
-
   return (
     <>
       {contacts.length > 0 && !error && (
@@ -62,7 +60,7 @@ function ContactList() {
         </AnimatePresence>
       )}
 
-      {error && <ErrorView message={error.message} />}
+      {error && <ErrorView message={error} />}
     </>
   );
 }

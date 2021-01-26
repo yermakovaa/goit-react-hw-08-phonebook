@@ -1,11 +1,7 @@
 .container {
-  max-width: 500px;
-  position: relative;
-
+  max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
-  padding: 40px;
-  background-color: var(--bgColor);
-  box-shadow: var(--boxShadow);
+  padding-left: 15px;
+  padding-right: 15px;
 }
