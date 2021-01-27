@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
+import { toast } from 'react-toastify';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LoaderComponent from '../../components/LoaderComponent';
@@ -32,6 +33,9 @@ export default function RegisterView() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (name.trim() === '' || email.trim() === '' || password.trim() === '') {
+      return toast.error('💩 Please fill in all fields!');
+    }
     dispatch(authOperations.register({ name, email, password }));
     setName('');
     setEmail('');

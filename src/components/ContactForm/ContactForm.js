@@ -52,13 +52,13 @@ function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
     if (checkRepeatName(name)) {
-      toast(`🤔 ${name} is already in the phonebook.`);
+      return toast(`🤔 ${name} is already in the phonebook.`);
     } else if (checkRepeatNumber(number)) {
-      toast(`🤔 ${number} is already in the phonebook.`);
+      return toast(`🤔 ${number} is already in the phonebook.`);
     } else if (checkEmptyQuery(name, number)) {
-      toast.info("😱 Enter the contact's name and number phone!");
+      return toast.info("😱 Enter the contact's name and number phone!");
     } else if (checkValidNumber(number)) {
-      toast.error('💩 Enter the correct number phone!');
+      return toast.error('💩 Enter the correct number phone!');
     } else {
       dispatch(contactsOperations.addContact(name, number));
     }
