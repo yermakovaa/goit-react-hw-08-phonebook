@@ -1,22 +1,19 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { motion, AnimatePresence } from 'framer-motion';
 import { variants } from '../../utils/motionVar';
-import ErrorView from '../ErrorView';
-import { ReactComponent as DeleteIcon } from '../../img/delete.svg';
 import s from './ContactList.module.css';
 
 function ContactList() {
   const dispatch = useDispatch();
   const visibleContacts = useSelector(contactsSelectors.getVisibleContacts);
   const contacts = useSelector(contactsSelectors.getContacts);
-  const isLoading = useSelector(contactsSelectors.getLoading);
-  const error = useSelector(contactsSelectors.getError);
 
   return (
     <>
-      {contacts.length > 0 && !error && (
+      {contacts.length > 0 && (
         <motion.ul className={s.list}>
           <AnimatePresence>
             {visibleContacts.map(({ id, name, number }) => (
@@ -33,20 +30,21 @@ function ContactList() {
                   <b>{name}</b>
                   <em>{number}</em>
                 </p>
-                <button
-                  className={s.btn}
+                <IconButton
+                  aria-label="delete"
+                  color="secondary"
                   type="button"
                   onClick={() => dispatch(contactsOperations.deleteContact(id))}
                 >
-                  <DeleteIcon width="26" height="26" />
-                </button>
+                  <DeleteIcon />
+                </IconButton>
               </motion.li>
             ))}
           </AnimatePresence>
         </motion.ul>
       )}
 
-      {!contacts.length && !error && !isLoading && (
+      {!contacts.length && (
         <AnimatePresence>
           <motion.p
             initial="initial"
@@ -59,8 +57,6 @@ function ContactList() {
           </motion.p>
         </AnimatePresence>
       )}
-
-      {error && <ErrorView message={error} />}
     </>
   );
 }

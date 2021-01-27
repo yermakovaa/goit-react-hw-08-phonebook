@@ -1,16 +1,12 @@
-import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
+import Button from '@material-ui/core/Button';
 import defaultAvatar from '../../img/avatar.png';
 import s from './UserMenu.module.css';
 
 export default function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.getUserName);
-
-  const onLogOut = useCallback(() => {
-    dispatch(authOperations.logOut());
-  }, [dispatch]);
 
   return (
     <div className={s.container}>
@@ -21,9 +17,14 @@ export default function UserMenu() {
         className={s.avatar}
       />
       <span className={s.name}>Welcome, {name}</span>
-      <button type="button" onClick={onLogOut}>
+      <Button
+        color="secondary"
+        variant="outlined"
+        type="button"
+        onClick={() => dispatch(authOperations.logOut())}
+      >
         Log out
-      </button>
+      </Button>
     </div>
   );
 }

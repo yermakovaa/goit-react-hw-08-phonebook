@@ -67,7 +67,7 @@ function App() {
         </Switch>
       </Suspense>
 
-      <ToastContainer autoClose={3700} position="top-center" />
+      <ToastContainer autoClose={3700} />
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 .list {
   margin-top: 30px;
-  color: #fff;
+  color: var(--secondaryTextColor);
   font-weight: 500;
   font-size: 18px;
 }
@@ -8,10 +8,10 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 2px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  background-color: var(--accentColor);
+  background-color: #e8eaf6;
 }
 
 .item:not(:last-child) {
@@ -23,19 +23,5 @@
   justify-content: space-between;
   text-align: left;
   width: 100%;
-}
-
-.btn {
-  margin-left: 30px;
-  padding: 0;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  transition: transform 250ms var(--timingFn);
-}
-
-.btn:hover,
-.btn:focus {
-  transform: scale(1.1);
+  margin-right: 10px;
 }

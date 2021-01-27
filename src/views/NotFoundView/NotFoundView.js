@@ -1,4 +1,4 @@
-import errorImage from '../../img/error.png';
+import errorImage from '../../img/pageNotFound.png';
 import s from './NotFoundView.module.css';
 
 export default function NotFoundView() {

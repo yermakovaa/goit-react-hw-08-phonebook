@@ -1,7 +1,7 @@
 :root {
   --primaryTextColor: #212121;
-  --secondaryTextColor: #566573;
-  --accentColor: #00bfff;
+  --secondaryTextColor: #757575;
+  --accentColor: #f50057;
   --bgColor: #fff9e7;
   --boxShadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
     0px 1px 1px rgba(0, 0, 0, 0.12);
@@ -25,9 +25,11 @@ body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   color: var(--primaryTextColor);
-  padding-top: 30px;
-  padding-bottom: 30px;
-  background-image: url('./img/bg.jpg');
+  background-image: linear-gradient(
+      rgba(255, 249, 231, 0.7),
+      rgba(255, 249, 231, 0.7)
+    ),
+    url('./img/bg.jpg');
 }
 
 img {

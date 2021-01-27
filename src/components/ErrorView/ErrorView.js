@@ -14,9 +14,9 @@ function ErrorView({ message }) {
         exit={{ scale: 0 }}
         transition={{ ease: 'easeOut', duration: 0.3 }}
       >
-        <img src={errorImage} width="300" alt="Sad PC" />
+        <img className={s.img} src={errorImage} width="450" alt="Sad PC" />
         <p text={message} className={s.text}>
-          {message}
+          Oh no! {message}!
         </p>
       </motion.div>
     </AnimatePresence>
