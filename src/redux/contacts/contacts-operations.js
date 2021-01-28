@@ -10,6 +10,7 @@ import {
   deleteContactSuccess,
   deleteContactError,
 } from './contacts-actions';
+import { toast } from 'react-toastify';
 
 export const fetchContacts = () => dispatch => {
   dispatch(fetchContactsRequest());
@@ -17,7 +18,17 @@ export const fetchContacts = () => dispatch => {
   axios
     .get('/contacts')
     .then(({ data }) => dispatch(fetchContactsSuccess(data)))
-    .catch(error => dispatch(fetchContactsError(error.message)));
+    .catch(error => {
+      dispatch(fetchContactsError(error));
+
+      if (error.response.status === 401) {
+        toast.warn('Something went wrong! Please reload the page!');
+      } else if (error.response.status === 404) {
+        toast.info("There is no such user's collection!");
+      } else if (error.response.status === 500) {
+        toast.error('Oops! Server error! Please try later!');
+      }
+    });
 };
 
 export const addContact = (name, number) => dispatch => {
@@ -31,7 +42,15 @@ export const addContact = (name, number) => dispatch => {
   axios
     .post('/contacts', contact)
     .then(({ data }) => dispatch(addContactSuccess(data)))
-    .catch(error => dispatch(addContactError(error.message)));
+    .catch(error => {
+      dispatch(addContactError(error));
+
+      if (error.response.status === 401) {
+        toast.warn('Something went wrong! Please reload the page!');
+      } else if (error.response.status === 400) {
+        toast.error('Contact creation error!');
+      }
+    });
 };
 
 export const deleteContact = contactId => dispatch => {
@@ -40,5 +59,15 @@ export const deleteContact = contactId => dispatch => {
   axios
     .delete(`/contacts/${contactId}`)
     .then(() => dispatch(deleteContactSuccess(contactId)))
-    .catch(error => dispatch(deleteContactError(error.message)));
+    .catch(error => {
+      dispatch(deleteContactError(error));
+
+      if (error.response.status === 401) {
+        toast.warn('Something went wrong! Please reload the page!');
+      } else if (error.response.status === 404) {
+        toast.info("There is no such user's collection!");
+      } else if (error.response.status === 500) {
+        toast.error('Oops! Server error! Please try later!');
+      }
+    });
 };

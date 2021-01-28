@@ -13,6 +13,7 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
 } from './auth-actions';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
 
@@ -34,7 +35,13 @@ export const register = credentials => async dispatch => {
     token.set(response.data.token);
     dispatch(registerSuccess(response.data));
   } catch (error) {
-    dispatch(registerError(error.message));
+    dispatch(registerError(error));
+
+    if (error.response.status === 400) {
+      toast.error('User creation error! Please try again!');
+    } else if (error.response.status === 500) {
+      toast.error('Oops! Server error! Please try later!');
+    }
   }
 };
 
@@ -47,7 +54,8 @@ export const logIn = credentials => async dispatch => {
     token.set(response.data.token);
     dispatch(loginSuccess(response.data));
   } catch (error) {
-    dispatch(loginError(error.message));
+    dispatch(loginError(error));
+    toast.error('Invalid email or password! Try again!');
   }
 };
 
@@ -60,7 +68,13 @@ export const logOut = () => async dispatch => {
     token.unset();
     dispatch(logoutSuccess());
   } catch (error) {
-    dispatch(logoutError(error.message));
+    dispatch(logoutError(error));
+
+    if (error.response.status === 401) {
+      toast.warn('Something went wrong! Please reload the page!');
+    } else if (error.response.status === 500) {
+      toast.error('Oops! Server error! Please try later!');
+    }
   }
 };
 
@@ -81,6 +95,8 @@ export const getCurrentUser = () => async (dispatch, getState) => {
 
     dispatch(getCurrentUserSuccess(response.data));
   } catch (error) {
-    dispatch(getCurrentUserError(error.message));
+    dispatch(getCurrentUserError(error));
+    token.unset();
+    toast.info('Authorization timed out! Please authenticate again!');
   }
 };

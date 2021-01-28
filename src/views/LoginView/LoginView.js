@@ -5,13 +5,11 @@ import { toast } from 'react-toastify';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LoaderComponent from '../../components/LoaderComponent';
-import ErrorView from '../../components/ErrorView';
 import s from './LoginView.module.css';
 
 export default function LoginView() {
   const dispatch = useDispatch();
   const isLoading = useSelector(authSelectors.getLoading);
-  const error = useSelector(authSelectors.getError);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,47 +41,41 @@ export default function LoginView() {
   };
 
   return (
-    <>
-      {!error && (
-        <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-          <TextField
-            label="Email"
-            variant="outlined"
-            color="secondary"
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            className={s.textField}
-          />
+    <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
+      <TextField
+        label="Email"
+        variant="outlined"
+        color="secondary"
+        type="email"
+        name="email"
+        value={email}
+        onChange={handleChange}
+        className={s.textField}
+      />
 
-          <TextField
-            label="Password"
-            variant="outlined"
-            color="secondary"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            className={s.textField}
-          />
+      <TextField
+        label="Password"
+        variant="outlined"
+        color="secondary"
+        type="password"
+        name="password"
+        value={password}
+        onChange={handleChange}
+        className={s.textField}
+      />
 
-          {!isLoading && (
-            <Button
-              variant="contained"
-              color="secondary"
-              size="large"
-              type="submit"
-            >
-              Log in
-            </Button>
-          )}
-
-          {isLoading && <LoaderComponent />}
-        </form>
+      {!isLoading && (
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          type="submit"
+        >
+          Log in
+        </Button>
       )}
 
-      {error && <ErrorView message={error} />}
-    </>
+      {isLoading && <LoaderComponent />}
+    </form>
   );
 }

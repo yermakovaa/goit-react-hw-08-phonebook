@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
 import { toast } from 'react-toastify';
-import Cleave from 'cleave.js/react';
+import NumberFormat from 'react-number-format';
 import Button from '@material-ui/core/Button';
 import LoaderComponent from '../LoaderComponent';
 import s from './ContactForm.module.css';
@@ -45,10 +45,6 @@ function ContactForm() {
     return name.trim() === '' || number.trim() === '';
   };
 
-  const checkValidNumber = number => {
-    return !/\d{3}[-]\d{2}[-]\d{2}/g.test(number);
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
     if (checkRepeatName(name)) {
@@ -57,8 +53,6 @@ function ContactForm() {
       return toast(`🤔 ${number} is already in the phonebook.`);
     } else if (checkEmptyQuery(name, number)) {
       return toast.info("😱 Enter the contact's name and number phone!");
-    } else if (checkValidNumber(number)) {
-      return toast.error('💩 Enter the correct number phone!');
     } else {
       dispatch(contactsOperations.addContact(name, number));
     }
@@ -80,14 +74,16 @@ function ContactForm() {
           name="name"
           value={name}
           onChange={handleChange}
-          placeholder="Ivan Ivanov"
+          placeholder="Enter name"
         />
       </label>
       <label className={s.label}>
         Number
-        <Cleave
-          options={{ delimiter: '-', blocks: [3, 2, 2] }}
-          placeholder="111-11-11"
+        <NumberFormat
+          placeholder="Enter phone number"
+          format="(###) ###-##-##"
+          mask="_"
+          pattern="^[0-9\s\(\)\-]{15}"
           type="tel"
           name="number"
           value={number}
