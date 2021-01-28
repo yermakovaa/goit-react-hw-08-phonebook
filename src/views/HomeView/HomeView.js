@@ -18,17 +18,25 @@ const HomeView = () => {
           transition="transition"
           variants={variants}
         >
-          Welcome to our service.{' '}
-          <span role="img" aria-label="Welcome icon">
-            💁‍♀️
-          </span>{' '}
-          Now you will exactly not forget your contacts!
+          Welcome 👋
         </motion.h1>
+      </AnimatePresence>
+      <AnimatePresence>
+        <motion.p
+          className={s.text}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition="transition"
+          variants={variants}
+        >
+          Now you will exactly not forget your contacts!
+        </motion.p>
       </AnimatePresence>
       {!isLoggedIn && (
         <AnimatePresence>
           <motion.p
-            className={s.text}
+            className={s.info}
             initial="initial"
             animate="animate"
             exit="exit"

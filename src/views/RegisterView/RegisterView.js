@@ -33,6 +33,8 @@ export default function RegisterView() {
     e.preventDefault();
     if (name.trim() === '' || email.trim() === '' || password.trim() === '') {
       return toast.error('💩 Please fill in all fields!');
+    } else if (password.length < 7) {
+      return toast.info('Passwords must be at least 7 characters long!');
     }
     dispatch(authOperations.register({ name, email, password }));
     setName('');
