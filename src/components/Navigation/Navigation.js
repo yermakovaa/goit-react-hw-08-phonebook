@@ -7,7 +7,7 @@ function Navigation() {
   const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);
 
   return (
-    <nav>
+    <nav className={s.nav}>
       <NavLink to="/" exact className={s.link} activeClassName={s.activeLink}>
         Home
       </NavLink>

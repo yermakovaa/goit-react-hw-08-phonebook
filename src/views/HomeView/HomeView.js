@@ -18,10 +18,11 @@ const HomeView = () => {
           transition="transition"
           variants={variants}
         >
-          Welcome to our service. Now you will exactly not forget your contacts!{' '}
+          Welcome to our service.{' '}
           <span role="img" aria-label="Welcome icon">
             💁‍♀️
-          </span>
+          </span>{' '}
+          Now you will exactly not forget your contacts!
         </motion.h1>
       </AnimatePresence>
       {!isLoggedIn && (
