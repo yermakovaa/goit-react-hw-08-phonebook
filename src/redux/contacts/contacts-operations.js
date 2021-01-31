@@ -21,12 +21,12 @@ export const fetchContacts = () => dispatch => {
     .catch(error => {
       dispatch(fetchContactsError(error));
 
-      if (error.response.status === 401) {
-        toast.warn('Something went wrong! Please reload the page!');
-      } else if (error.response.status === 404) {
+      if (error.response.status === 404) {
         toast.info("There is no such user's collection!");
       } else if (error.response.status === 500) {
         toast.error('Oops! Server error! Please try later!');
+      } else {
+        toast.error('Something went wrong! Please reload the page!');
       }
     });
 };
@@ -45,10 +45,10 @@ export const addContact = (name, number) => dispatch => {
     .catch(error => {
       dispatch(addContactError(error));
 
-      if (error.response.status === 401) {
-        toast.warn('Something went wrong! Please reload the page!');
-      } else if (error.response.status === 400) {
+      if (error.response.status === 400) {
         toast.error('Contact creation error!');
+      } else {
+        toast.error('Something went wrong! Please reload the page!');
       }
     });
 };
@@ -62,12 +62,12 @@ export const deleteContact = contactId => dispatch => {
     .catch(error => {
       dispatch(deleteContactError(error));
 
-      if (error.response.status === 401) {
-        toast.warn('Something went wrong! Please reload the page!');
-      } else if (error.response.status === 404) {
+      if (error.response.status === 404) {
         toast.info("There is no such user's collection!");
       } else if (error.response.status === 500) {
         toast.error('Oops! Server error! Please try later!');
+      } else {
+        toast.error('Something went wrong! Please reload the page!');
       }
     });
 };

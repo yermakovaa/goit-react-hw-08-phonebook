@@ -41,6 +41,8 @@ export const register = credentials => async dispatch => {
       toast.error('User creation error! Please try again!');
     } else if (error.response.status === 500) {
       toast.error('Oops! Server error! Please try later!');
+    } else {
+      toast.error('Something went wrong!');
     }
   }
 };
@@ -70,10 +72,10 @@ export const logOut = () => async dispatch => {
   } catch (error) {
     dispatch(logoutError(error));
 
-    if (error.response.status === 401) {
-      toast.warn('Something went wrong! Please reload the page!');
-    } else if (error.response.status === 500) {
+    if (error.response.status === 500) {
       toast.error('Oops! Server error! Please try later!');
+    } else {
+      toast.error('Something went wrong! Please reload the page!');
     }
   }
 };
@@ -97,6 +99,6 @@ export const getCurrentUser = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch(getCurrentUserError(error));
     token.unset();
-    toast.info('Authorization timed out! Please authenticate again!');
+    toast.warn('Authorization timed out! Please authenticate again!');
   }
 };
